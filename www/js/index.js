@@ -43,9 +43,9 @@ var app = {
                 ref.addEventListener('loaderror', function(event) { 
                     alert('No cuenta con internet');
                     //ref.close();
-                    window.history.back();
+                    ref.history.back();
                     alert('error: ' + event.message); 
-                    return;
+                    //return;
                 });
                 ref.addEventListener('offline', function(event) { 
                     alert('No cuenta con internet');
