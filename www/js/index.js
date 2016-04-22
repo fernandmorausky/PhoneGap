@@ -40,7 +40,12 @@ var app = {
                 ref.addEventListener('loadstart', function(event) { 
                  });
                 //ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
-                ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
+                ref.addEventListener('loaderror', function(event) { 
+                    alert('No cuenta con internet');
+                    ref.close();
+                    alert('error: ' + event.message); 
+                    return;
+                });
                 ref.addEventListener('offline', function(event) { 
                     alert('No cuenta con internet');
                     ref.close();
