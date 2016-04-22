@@ -38,19 +38,17 @@ var app = {
                 app.receivedEvent('deviceready');
                 var ref = window.open('http://ingenieriadeseguridad.telefonica.com/es/portada.html', '_blank', 'location=no, toolbar=no');
                 ref.addEventListener('loadstart', function(event) { 
-                      // if ((navigator.onLine)) {
-                      //   alert('No cuenta con internet');
-                      //   ref.close();
-                      //   return;
-                      // }
                  });
                 //ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
-                //ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
+                ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
                 ref.addEventListener('offline', function(event) { 
                     alert('No cuenta con internet');
                     ref.close();
                     return;
-                } );
+                } ,false);
+                ref.addEventListener('online', function(event) { 
+                    alert('Cuenta con internet');
+                } ,false);
                 //ref.addEventListener('exit', function(event) { alert(event.type); });
             } 
             else{
