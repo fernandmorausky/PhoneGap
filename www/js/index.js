@@ -42,7 +42,7 @@ var app = {
                 //ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
                 ref.addEventListener('loaderror', function(event) { 
                     alert('No cuenta con internet');
-                    ref.close();
+                    //ref.close();
                     window.history.back();
                     alert('error: ' + event.message); 
                     return;
