@@ -34,27 +34,23 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         try{
-            if (navigator.onLine) {
+            if ( navigator.connection.type != 'none') {
                 app.receivedEvent('deviceready');
                 var ref = window.open('http://ingenieriadeseguridad.telefonica.com/es/portada.html', '_blank', 'location=no, toolbar=no');
                 ref.addEventListener('loadstart', function(event) { 
+                     if ( navigator.connection.type != 'none') {
+                        alert(navigator.connection.type );
+                     }
+                     alert(navigator.connection.type );
                  });
                 //ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
                 ref.addEventListener('loaderror', function(event) { 
                     alert('No cuenta con internet');
-                    //ref.close();
+                    ref.close();
                     ref.history.back();
                     alert('error: ' + event.message); 
-                    //return;
-                });
-                ref.addEventListener('offline', function(event) { 
-                    alert('No cuenta con internet');
-                    ref.close();
                     return;
-                } ,false);
-                ref.addEventListener('online', function(event) { 
-                    alert('Cuenta con internet');
-                } ,false);
+                });
                 //ref.addEventListener('exit', function(event) { alert(event.type); });
             } 
             else{
