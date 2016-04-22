@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+</head>
+<?
+//Creamos la conexión a nuestra base de datos
+//Hay que sustituir el usuario contraseña
+$conexion = mysql_connect("localhost", "(usuario)", "(password)");
+//Aquí hay que sustituir la el nombre de la base de datos
+mysql_select_db("(base de datos)", $conexion);
+?>
+<body>
+<p>Formulario para insertar datos en SQL</p>
+<!-- Ahora creamos el formulario que enviará los datos -->
+<!-- En el apartado 'action' hay que poner a que página
+enviaremos los datos, en este caso y como ejemplo lo enviaremos
+a index.php, es decir, a esta misma web -->
+<form id="form1" name="form1" method="post" action="index.php">
+  <table width="200" border="0">
+  <tr>
+    <td width="61">Nombre:</td>
+    <td width="123">
+      <label for="nombre"></label>
+      <input type="text" name="nombre" id="nombre" />
+    </td>
+  </tr>
+  <tr>
+    <td>Nick:</td>
+    <td><label for="nick"></label>
+    <input type="text" name="nick" id="nick" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td align="right">
+    <input type="submit" name="enviar" id="enviar" value="Enviar" />
+    </td>
+  </tr>
+</table>
+</form>
+<?
+    //Comprovamos si se han recivido datos del formulario
+    //Como vemos se lo utilizando el campo nombre
+    if(isset($_POST['nombre'])){
+      //Insertamos los datos en SQL en mi caso la tabla se  
+      //llama personas y consta de dos celdas 
+      //la de nombres y la de nick
+      $insertar = "INSERT INTO personas (nombre, nick) 
+          VALUES ('".$_POST['nombre']."', '".$_POST['nick']."')";
+      mysql_query($insertar,$conexion); 
+     }
+?>
+
+Mostramos los resultados que hay en SQL <br><br>
+<?
+ //Creamos el Select para decir que campos queremos mostrar
+ //en este caso de ejemplo mostraremos los dos que hay
+ $sql = "SELECT nombre,nick FROM personas";
+ $retval = mysql_query( $sql, $conexion);
+ //Creamos un Bucle que recorra toda la tabla de SQL
+ while($row =  mysql_fetch_assoc($retval)){
+    echo "Nombre: ".$row['nombre'].", Nick: ".$row['nick']."<br>";
+} 
+?>
+</body>
+</html>

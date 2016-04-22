@@ -33,14 +33,40 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+        try{
+            if (navigator.onLine) {
 
-        var ref = window.open('http://ingenieriadeseguridad.telefonica.com/es/portada.html', '_blank', 'location=no, toolbar=no');
 
-        ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
-        ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
-        ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
-        ref.addEventListener('exit', function(event) { alert(event.type); });
+            app.receivedEvent('deviceready');
+
+            var ref = window.open('http://ingenieriadeseguridad.telefonica.com/es/portada.html', '_blank', 'location=no, toolbar=no');
+
+            ref.addEventListener('loadstart', function(event) { 
+                  if (!navigator.onLine) {
+                    alert('No cuenta con internet');
+                    ref.close();
+                    // if(navigator.app){
+                    //     navigator.app.exitApp();
+                    // } else {
+                    //     ref.close(); //For IOs
+                    // }
+                    return;
+                  }
+                    
+             });
+            //ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
+            //ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
+            ref.addEventListener('offline', function(event) { alert('No cuenta con internet'); } );
+            //ref.addEventListener('exit', function(event) { alert(event.type); });
+            } else{
+                alert('No cuenta con internet');
+            };
+
+        }catch(e){
+
+        }
+
+        
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
