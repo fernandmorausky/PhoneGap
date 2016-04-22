@@ -50,7 +50,7 @@ var app = {
                 //ref.addEventListener('exit', function(event) { alert(event.type); });
             } 
             else{
-                alert('No cuenta con internet');
+                //alert('No cuenta con internet');
             }
 
         }catch(e){
