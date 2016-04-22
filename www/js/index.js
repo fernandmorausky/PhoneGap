@@ -42,6 +42,7 @@ var app = {
                         alert(navigator.connection.type );
                      }
                      alert(navigator.connection.type );
+                     alert(navigator.onLine );
                  });
                 //ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
                 ref.addEventListener('loaderror', function(event) { 
