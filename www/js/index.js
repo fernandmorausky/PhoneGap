@@ -43,6 +43,7 @@ var app = {
                 ref.addEventListener('loaderror', function(event) { 
                     alert('No cuenta con internet');
                     ref.close();
+                    window.history.back();
                     alert('error: ' + event.message); 
                     return;
                 });
