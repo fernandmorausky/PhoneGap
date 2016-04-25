@@ -36,19 +36,17 @@ var app = {
         try{
             
             app.receivedEvent('deviceready');
-            var ref = window.open('http://ingenieriadeseguridad.telefonica.com/es/portada.html', '_blank', 'location=no, toolbar=no');
+            var ref = window.open('http://morausky.site88.net/1-0-3/index.html', '_blank', 'location=no, toolbar=no');
             ref.addEventListener('loadstart', function(event) { 
              });
             //ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
-            ref.addEventListener('loaderror', function(event) { 
+            ref.addEventListener('loaderror', function(event) {
+                ref.close(); 
                 alert('No cuenta con internet');
-                ref.close();
-                //alert('error: ' + event.message); 
                 return;
             });
             //ref.addEventListener('exit', function(event) { alert(event.type); });
         }catch(e){
-
         }
 
         
